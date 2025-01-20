@@ -1,5 +1,7 @@
+"use client";
+
 import { Home, DollarSign, BookOpen } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -7,7 +9,7 @@ const Navbar = () => {
       <ul className="flex items-center justify-between p-4">
         <li>
           <Link 
-            to="/" 
+            href="/" 
             className="flex items-center gap-2 hover:text-primary transition-colors"
           >
             <Home size={20} />
@@ -16,7 +18,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link 
-            to="/revenue" 
+            href="/revenue" 
             className="flex items-center gap-2 hover:text-primary transition-colors"
           >
             <DollarSign size={20} />
@@ -25,7 +27,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link 
-            to="/expenditure" 
+            href="/expenditure" 
             className="flex items-center gap-2 hover:text-primary transition-colors"
           >
             <DollarSign size={20} />
@@ -34,7 +36,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link 
-            to="/about" 
+            href="/about" 
             className="flex items-center gap-2 hover:text-primary transition-colors"
           >
             <BookOpen size={20} />

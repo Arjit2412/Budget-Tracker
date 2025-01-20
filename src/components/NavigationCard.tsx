@@ -1,21 +1,23 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
 
 interface NavigationCardProps {
   title: string;
   subtitle?: string;
   image: string;
-  to: string;
+  href: string;
 }
 
-const NavigationCard = ({ title, subtitle, image, to }: NavigationCardProps) => {
+const NavigationCard = ({ title, subtitle, image, href }: NavigationCardProps) => {
   return (
-    <Link to={to} className="block">
+    <Link href={href} className="block">
       <div className="glass-card card-hover rounded-xl overflow-hidden max-w-sm mx-auto">
-        <div className="h-48 overflow-hidden">
-          <img
+        <div className="h-48 overflow-hidden relative">
+          <Image
             src={image}
             alt={title}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
         </div>
         <div className="p-6">

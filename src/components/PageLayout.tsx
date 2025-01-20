@@ -1,11 +1,14 @@
+"use client";
+
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (isDark) {
@@ -18,7 +21,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen p-6 animate-fadeIn">
       <header className="max-w-7xl mx-auto flex justify-between items-center mb-8">
-        <Link to="/" className="text-2xl font-bold text-primary">
+        <Link href="/" className="text-2xl font-bold text-primary">
           Government Portal
         </Link>
         <button
@@ -31,9 +34,9 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
       
       <Navbar />
       
-      {location.pathname !== "/" && (
+      {pathname !== "/" && (
         <div className="max-w-7xl mx-auto mb-8">
-          <Link to="/" className="text-primary hover:underline">
+          <Link href="/" className="text-primary hover:underline">
             ← Back to Home
           </Link>
         </div>
