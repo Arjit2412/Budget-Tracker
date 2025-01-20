@@ -1,6 +1,7 @@
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(false);
@@ -16,7 +17,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="min-h-screen p-6 animate-fadeIn">
-      <header className="max-w-7xl mx-auto flex justify-between items-center mb-12">
+      <header className="max-w-7xl mx-auto flex justify-between items-center mb-8">
         <Link to="/" className="text-2xl font-bold text-primary">
           Government Portal
         </Link>
@@ -27,6 +28,8 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
           {isDark ? <SunIcon /> : <MoonIcon />}
         </button>
       </header>
+      
+      <Navbar />
       
       {location.pathname !== "/" && (
         <div className="max-w-7xl mx-auto mb-8">

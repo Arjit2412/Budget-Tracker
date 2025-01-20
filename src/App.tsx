@@ -17,6 +17,9 @@ const App = () => {
         <Route path="/state" element={<States />} />
         <Route path="/state/:state" element={<StateMinistries />} />
         <Route path="/local" element={<Local />} />
+        <Route path="/revenue" element={<div className="text-center py-12"><h1 className="text-3xl font-bold">Revenue Page</h1></div>} />
+        <Route path="/expenditure" element={<div className="text-center py-12"><h1 className="text-3xl font-bold">Expenditure Page</h1></div>} />
+        <Route path="/about" element={<div className="text-center py-12"><h1 className="text-3xl font-bold">About Us Page</h1></div>} />
       </Routes>
     </BrowserRouter>
   );
