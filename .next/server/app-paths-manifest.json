@@ -1,0 +1,9 @@
+{
+  "/page": "app/page.js",
+  "/centre/page": "app/centre/page.js",
+  "/state/page": "app/state/page.js",
+  "/local/page": "app/local/page.js",
+  "/revenue/page": "app/revenue/page.js",
+  "/expenditure/page": "app/expenditure/page.js",
+  "/about/page": "app/about/page.js"
+}

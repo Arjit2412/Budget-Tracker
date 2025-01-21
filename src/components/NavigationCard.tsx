@@ -20,8 +20,8 @@ const NavigationCard = ({ title, subtitle, image, href }: NavigationCardProps) =
             className="object-cover"
           />
         </div>
-        <div className="p-6">
-          <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <div className="p-6 ">
+          <h3 className="text-xl font-semibold mb-2 ">{title}</h3>
           {subtitle && (
             <p className="text-muted-foreground">{subtitle}</p>
           )}

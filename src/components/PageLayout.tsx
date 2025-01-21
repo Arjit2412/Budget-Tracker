@@ -11,10 +11,21 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   useEffect(() => {
+  if (typeof window !== 'undefined') {
+    const savedPreference = localStorage.getItem('isDark');
+    if (savedPreference) {
+      setIsDark(JSON.parse(savedPreference));
+    }
+  }
+}, []);
+
+  useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add("dark");
+      localStorage.setItem('isDark', 'true'); // Save preference
     } else {
       document.documentElement.classList.remove("dark");
+      localStorage.setItem('isDark', 'false'); // Save preference
     }
   }, [isDark]);
 
@@ -34,13 +45,13 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
       
       <Navbar />
       
-      {pathname !== "/" && (
+      {/* {pathname !== "/" && (
         <div className="max-w-7xl mx-auto mb-8">
           <Link href="/" className="text-primary hover:underline">
             ← Back to Home
           </Link>
         </div>
-      )}
+      )} */}
 
       <main className="max-w-7xl mx-auto">
         {children}
