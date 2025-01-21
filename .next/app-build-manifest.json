@@ -26,15 +26,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/local/page.js"
     ],
-    "/revenue/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/revenue/page.js"
-    ],
     "/expenditure/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/expenditure/page.js"
+    ],
+    "/revenue/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/revenue/page.js"
     ],
     "/about/page": [
       "static/chunks/webpack.js",
