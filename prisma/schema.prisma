@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  APPROVED
+  REJECTED
+  HALTED
+  ONGOING
+  SUSPENDED
+}
+
+model Ministry {
+  mid         String        @id
+  central     Boolean
+  state       String?
+  name        String
+  head        Person[]
+  income      Income[]
+  expenditure Expenditure[]
+  scheme      Scheme[]
+  project     Project[]
+  State       State?        @relation(fields: [stateSid], references: [sid])
+  stateSid    String?
+}
+
+model Person {
+  pid         String    @id
+  name        String
+  phone       String
+  address     String
+  area        String[]
+  position    String[]
+  Ministry    Ministry? @relation(fields: [ministryMid], references: [mid])
+  ministryMid String?
+  Project     Project?  @relation(fields: [projectPid], references: [pid])
+  projectPid  String?
+  State       State?    @relation(fields: [stateSid], references: [sid])
+  stateSid    String?
+  Local       Local?    @relation(fields: [localLid], references: [lid])
+  localLid    String?
+  Scheme      Scheme?   @relation(fields: [schemeSid], references: [sid])
+  schemeSid   String?
+}
+
+model Project {
+  pid         String        @id
+  name        String
+  desc        String
+  start       BigInt
+  end         BigInt?
+  status      Status
+  head        Person[]
+  state       State[]
+  allocation  Expenditure[]
+  photos      Photo[]
+  central     Boolean
+  local       Local[]
+  Ministry    Ministry?     @relation(fields: [ministryMid], references: [mid])
+  ministryMid String?
+}
+
+model State {
+  sid      String     @id
+  name     String
+  head     Person[]
+  ministry Ministry[]
+  income   Income[]
+  project  Project[]
+  scheme   Scheme[]
+}
+
+model Expenditure {
+  eid         String    @id
+  image       String?
+  desc        String
+  name        String
+  amount      String
+  project     Project?  @relation(fields: [projectId], references: [pid])
+  scheme      Scheme?   @relation(fields: [schemeId], references: [sid])
+  projectId   String?
+  schemeId    String?
+  Ministry    Ministry? @relation(fields: [ministryMid], references: [mid])
+  ministryMid String?
+  Income      Income?   @relation(fields: [incomeIid], references: [iid])
+  incomeIid   String?
+  Local       Local?    @relation(fields: [localLid], references: [lid])
+  localLid    String?
+}
+
+model Income {
+  iid         String        @id
+  name        String
+  desc        String
+  date        BigInt
+  t_amount    String
+  expenditure Expenditure[]
+  central     Boolean
+  state       State?        @relation(fields: [stateId], references: [sid])
+  local       Local?        @relation(fields: [localId], references: [lid])
+  stateId     String?
+  localId     String?
+  Ministry    Ministry?     @relation(fields: [ministryMid], references: [mid])
+  ministryMid String?
+}
+
+model Local {
+  lid         String        @id
+  head        Person[]
+  name        String
+  income      Income[]
+  scheme      Scheme[]
+  project     Project[]
+  expenditure Expenditure[]
+}
+
+model Scheme {
+  sid         String        @id
+  name        String
+  desc        String
+  central     Boolean
+  state       State[]
+  start       BigInt
+  end         BigInt
+  status      Status
+  head        Person[]
+  photo       Photo[]
+  expenditure Expenditure[]
+  Ministry    Ministry?     @relation(fields: [ministryMid], references: [mid])
+  ministryMid String?
+  Local       Local?        @relation(fields: [localLid], references: [lid])
+  localLid    String?
+}
+
+model Photo {
+  id         Int      @id @default(autoincrement())
+  image      String
+  desc       String
+  projectId  String?
+  schemeId   String?
+  Project    Project? @relation(fields: [projectPid], references: [pid])
+  projectPid String?
+  Scheme     Scheme?  @relation(fields: [schemeSid], references: [sid])
+  schemeSid  String?
+}

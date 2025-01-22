@@ -1,4 +1,4 @@
-// File: C:\Users\kambo\OneDrive\Desktop\NextProject\civic-cardinal\src\app\page.tsx
+// File: /home/zolo/Desktop/ForkedRepos/Budget-Tracker/src/app/page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
