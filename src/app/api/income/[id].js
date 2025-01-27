@@ -1,25 +1,61 @@
 import prisma from "../../../prisma/client";
 
 export default async function handler(req, res) {
-  const { id } = req.query;
 
   try {
     if (req.method === "GET") {
       // Fetch income by ID
-      const income = await prisma.income.findUnique({
-        where: { iid: id },
-        include: {
-          expenditure: true,
-          state: true,
-          local: true,
-        },
-      });
+      const state = req.headers['state'];
+      const local = req.headers['local'];
+      const name = req.headers['name'];
+      const id = req.headers['id'];
 
-      if (!income) {
-        return res.status(404).json({ error: "Income not found" });
+      if(state){
+        const state = await prisma.state.findUnique({
+          where: { state: state },
+        });
+        if (!state) {
+          return res.status(404).json({ error: "State not found" });
+        }
+        return res.status(200).json(state);
       }
-
-      return res.status(200).json(income);
+      else if(local){
+        const local = await prisma.local.findUnique({
+          where: { local: local },
+        });
+        if (!local) {
+          return res.status(404).json({ error: "Local not found" });
+        }
+        return res.status(200).json(local);
+      }
+      else if(name){
+        const income = await prisma.income.findFirst({
+          where: { name: name },
+          include: {
+            expenditure: true,
+            state: true,
+            local: true,
+          },
+        });
+        if (!income) {
+          return res.status(404).json({ error: "Income not found" });
+        }
+        return res.status(200).json(income);
+      }
+      else if(id){
+        const income = await prisma.income.findUnique({
+          where: { iid: id },
+          include: {
+            expenditure: true,
+            state: true,
+            local: true,
+          },
+        });
+        if (!income) {
+          return res.status(404).json({ error: "Income not found" });
+        }
+        return res.status(200).json(income);
+      }
     } else if (req.method === "PUT") {
       // Update income by ID
       const { name, desc, date, t_amount, expenditure, central, state, local } =
