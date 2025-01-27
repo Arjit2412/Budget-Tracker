@@ -5,7 +5,7 @@ export default function Home() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <NavigationCard
         title="Centre"
-        image="/placeholder.svg"
+        image="/government-of-india.jpg"
         href="/centre"
       />
       <NavigationCard
