@@ -5,12 +5,7 @@ Ministry: {
     mid: string;
     central: boolean;
     state: string | null;
-    name: string;
-    head: Person[]; // array of person.id s
-    income: Income[]; // array of income.id s
-    expenditure: Expenditure[]; // array of expenditure.id s
-    scheme: Scheme[]; // array of scheme.id s
-    project: Project[]; // array of project.id s    
+    name: string;    
 }
 ```
 
@@ -22,6 +17,11 @@ Person: {
     address: string;
     area?: string[];
     position: string[];
+    stateIds: string[];
+    projectIds: string[];
+    schemeIds: string[];
+    localIds: string[];
+    ministryIds: string[];
 }
 ```
 
@@ -33,12 +33,10 @@ Project: {
     start: date in millisec;
     end: date in millisec | null;
     status: enum Status;
-    head: Person[];
-    state: State[]; // array of state.id s
-    allocation: Expenditure[];
+    stateIds: string[];
     photos: {image: string;desc: string}[];
     central: boolean;
-    local: Local[]; // array of local.id
+    localIds: string[]; // array of local.id
 }
 enum Status = {"APPROVED","REJECTED", "HALTED", "ONGOING", "SUSPENDED"}
 ```
@@ -47,11 +45,6 @@ enum Status = {"APPROVED","REJECTED", "HALTED", "ONGOING", "SUSPENDED"}
 State: {
     sid: string;
     name: string;
-    head: Person[];
-    ministry: Ministry[]; // array of ministry.id
-    income: Income[];
-    project: Project[];
-    scheme: Scheme[];
 }
 ```
 
@@ -62,8 +55,12 @@ Expenditure: {
     desc: string;
     name: string;
     amount: string;
-    project: project.id | null;
-    scheme: scheme.id | null;
+    projectId: string | null;
+    schemeId: string | null;
+    incomeId: string | null;
+    ministryId: string | null;
+    central: boolean;
+    stateId: string;
 }
 ```
 
@@ -74,23 +71,17 @@ Income: {
     desc: string;
     date: date in millisec;
     t_amount: string;
-    expenditure?: Expenditure[];
     central: boolean;
-    state: state.id | null;
-    local: local.id | null;
-    ministry: ministry.id | null;
+    stateId: string | null;
+    localId: string | null;
+    ministryId: string | null;
 }
 ```
 
 ```js
 Local: {
     lid: string;
-    head: Person[];
     name: string;
-    income: Income[];
-    scheme: Scheme[];
-    project: Project[];
-    expenditure: Expenditure[];
 }
 ```
 
@@ -100,12 +91,10 @@ Scheme: {
     name: string;
     desc: string;
     central: boolean;
-    state: State[] | null;
+    stateIds: State[] | null;
     start: date in milli;
     end: date in milli;
     status: enum Status;
-    head: Person[];
-    photo: {image: string,desc: string}[];
-    expenditure: Expenditure[];
+    photos: {image: string,desc: string}[];
 }
 ```

@@ -1,6 +1,10 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
+import { v4 as uuidv4 } from "uuid";
+import { MinistryInput } from "@/app/constants/backend";
 
-export default async function handler(req, res) {
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === "GET") {
       // Fetch all ministries
@@ -9,28 +13,21 @@ export default async function handler(req, res) {
     } else if (req.method === "POST") {
       // Create a new ministry
       const {
-        mid,
         central,
         state,
         name,
-        head,
-        income,
-        expenditure,
-        scheme,
-        project,
-      } = req.body;
-
+        desc
+      } = req.body as MinistryInput;
+      if (central && state) throw new Error("State value should be null when central is true");
+      if (!name || !desc) throw new Error("Ministry name and description can't be null")
+      const mid = uuidv4();
       const newMinistry = await prisma.ministry.create({
         data: {
           mid,
           central,
           state,
           name,
-          head,
-          income,
-          expenditure,
-          scheme,
-          project,
+          desc
         },
       });
 
