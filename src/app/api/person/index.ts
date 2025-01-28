@@ -1,6 +1,11 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
+import { v4 as uuidv4 } from "uuid";
+import { PersonInput } from "@/app/constants/backend";
+import createImgbbUrl from "../helpers/imgbbFileUpload";
 
-export default async function handler(req, res) {
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === "GET") {
       // Fetch all persons
@@ -8,8 +13,11 @@ export default async function handler(req, res) {
       return res.status(200).json(persons);
     } else if (req.method === "POST") {
       // Create a new person
-      const { pid, name, phone, address, area, position } = req.body;
-
+      const { name, phone, address, area, position, photo } = req.body as PersonInput;
+      if (!photo) throw new Error("Photo not given");
+      if (!name || !phone || (area.length == 0 && position.length == 0)) throw new Error("Either name, phone number is missing. Or both area and position array are empty");
+      const pid = uuidv4();
+      const image = await createImgbbUrl(photo);
       const newPerson = await prisma.person.create({
         data: {
           pid,
@@ -18,6 +26,7 @@ export default async function handler(req, res) {
           address,
           area,
           position,
+          photo: image?.url as string,
         },
       });
 

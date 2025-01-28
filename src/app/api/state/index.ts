@@ -1,6 +1,10 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
+import { v4 as uuidv4 } from "uuid";
+import { StateInput } from "@/app/constants/backend";
 
-export default async function handler(req, res) {
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === "GET") {
       // Fetch all states
@@ -8,17 +12,12 @@ export default async function handler(req, res) {
       return res.status(200).json(states);
     } else if (req.method === "POST") {
       // Create a new state
-      const { sid, name, head, ministry, income, project, scheme } = req.body;
-
+      const { name } = req.body as StateInput;
+      const sid = uuidv4();
       const newState = await prisma.state.create({
         data: {
           sid,
           name,
-          head: { connect: head.map((id) => ({ pid: id })) },
-          ministry: { connect: ministry.map((id) => ({ mid: id })) },
-          income: { connect: income.map((id) => ({ iid: id })) },
-          project: { connect: project.map((id) => ({ pid: id })) },
-          scheme: { connect: scheme.map((id) => ({ sid: id })) },
         },
       });
 
