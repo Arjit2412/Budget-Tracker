@@ -1,3 +1,5 @@
+## REFER prisma/schema.prisma
+
 ```js
 Ministry: {
     mid: string;
