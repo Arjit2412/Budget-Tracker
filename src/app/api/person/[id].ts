@@ -1,11 +1,17 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
 
   try {
     if (req.method === "GET") {
       // Fetch person by ID
+      const id = req.query["id"] as string;
+
+      if (!id) {
+        return res.status(400).json({ error: "Person ID is required" });
+      }
       const person = await prisma.person.findUnique({
         where: { pid: id },
       });
@@ -18,7 +24,11 @@ export default async function handler(req, res) {
     } else if (req.method === "PUT") {
       // Update person by ID
       const { name, phone, address, area, position } = req.body;
+      const id = req.query["id"] as string;
 
+      if (!id) {
+        return res.status(400).json({ error: "Person ID is required" });
+      }
       const updatedPerson = await prisma.person.update({
         where: { pid: id },
         data: {
@@ -33,6 +43,11 @@ export default async function handler(req, res) {
       return res.status(200).json(updatedPerson);
     } else if (req.method === "DELETE") {
       // Delete person by ID
+      const id = req.query["id"] as string;
+
+      if (!id) {
+        return res.status(400).json({ error: "Person ID is required" });
+      }
       await prisma.person.delete({
         where: { pid: id },
       });

@@ -64,7 +64,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const id = req.query["id"] as string;
 
       if (!id) {
-        return res.status(400).json({ error: "Ministry ID is required" });
+        return res.status(400).json({ error: "Project ID is required" });
       }
 
       const updatedProject = await prisma.project.update({
@@ -90,7 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const id = req.query["id"] as string;
 
       if (!id) {
-        return res.status(400).json({ error: "Ministry ID is required" });
+        return res.status(400).json({ error: "Project ID is required" });
       }
       await prisma.project.delete({
         where: { pid: id },

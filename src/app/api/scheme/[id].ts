@@ -56,7 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const id = req.query["id"] as string;
 
       if (!id) {
-        return res.status(400).json({ error: "Ministry ID is required" });
+        return res.status(400).json({ error: "Scheme ID is required" });
       }
       const updatedScheme = await prisma.scheme.update({
         where: { sid: id },
@@ -82,7 +82,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const id = req.query["id"] as string;
 
       if (!id) {
-        return res.status(400).json({ error: "Ministry ID is required" });
+        return res.status(400).json({ error: "Scheme ID is required" });
       }
       await prisma.scheme.delete({
         where: { sid: id },
