@@ -135,3 +135,11 @@ Combining the above three conditions Our best case scenario is to create `Map` f
 1. Finalize Data Visualization. - Arihant and Arjit
 2. Patch up and finalize the project. - Zolo and Ashu
 3. Create roadmap for Day 6 - Zolo
+
+
+---------------------------
+### Order of searching among routes are : 
+- ID
+- Ministry
+- Local
+- State

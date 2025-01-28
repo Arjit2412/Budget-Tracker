@@ -76,6 +76,7 @@ Income: {
     central: boolean;
     state: state.id | null;
     local: local.id | null;
+    ministry: ministry.id | null;
 }
 ```
 
