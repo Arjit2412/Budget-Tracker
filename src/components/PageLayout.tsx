@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
+// import MapComponent from "./MapComponent";
+
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(false);
@@ -44,6 +46,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
       </header>
       
       <Navbar />
+    
       
       {/* {pathname !== "/" && (
         <div className="max-w-7xl mx-auto mb-8">
