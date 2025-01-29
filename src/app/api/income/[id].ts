@@ -16,7 +16,6 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
         const income = await prisma.income.findUnique({
           where: { iid: id },
           include: {
-            expenditure: true,
             state: true,
             local: true,
           },
@@ -29,9 +28,8 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
 
       if(ministry){
         const income = await prisma.income.findMany({
-          where: { ministryMid: ministry },
+          where: { ministryId: ministry },
           include: {
-            expenditure: true,
             state: true,
             local: true,
           },
@@ -43,7 +41,7 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
       }
 
       if(localParam){
-        const local = await prisma.local.findMany({
+        const local = await prisma.income.findMany({
           where: { localId: localParam },
         });
         if (!local) {
@@ -53,8 +51,8 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
       }
 
       if(state){
-        const stateRes = await prisma.state.findMany({
-          where: { state: state },
+        const stateRes = await prisma.income.findMany({
+          where: { stateId: state },
         });
         if (!stateRes) {
           return res.status(404).json({ error: "State not found" });
@@ -65,7 +63,7 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
 
     } else if (req.method === "PUT") {
       // Update income by ID
-      const { name, desc, date, t_amount, expenditure, central, state, local } =
+      const { name, desc, date, t_amount, central, state, local } =
         req.body;
         const id = req.query["id"] as string;
 
@@ -82,9 +80,6 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
           central,
           state: state ? { connect: { sid: state } } : undefined,
           local: local ? { connect: { lid: local } } : undefined,
-          expenditure: expenditure
-            ? { connect: expenditure.map((eid: string) => ({ eid })) }
-            : undefined,
         },
       });
 

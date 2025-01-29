@@ -63,11 +63,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           central,
           state,
           name,
-          head,
-          income,
-          expenditure,
-          scheme,
-          project,
         },
       });
 

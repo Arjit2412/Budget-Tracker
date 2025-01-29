@@ -14,13 +14,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
       const local = await prisma.local.findUnique({
         where: { lid: id },
-        include: {
-          head: true,
-          income: true,
-          scheme: true,
-          project: true,
-          expenditure: true,
-        },
       });
 
       if (!local) {
@@ -40,18 +33,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         where: { lid: id },
         data: {
           name,
-          head: head ? { connect: head.map((pid: string) => ({ pid })) } : undefined,
-          income: income
+          incomes: income
             ? { connect: income.map((iid: string) => ({ iid })) }
-            : undefined,
-          scheme: scheme
-            ? { connect: scheme.map((sid: string) => ({ sid })) }
-            : undefined,
-          project: project
-            ? { connect: project.map((pid: string) => ({ pid })) }
-            : undefined,
-          expenditure: expenditure
-            ? { connect: expenditure.map((eid: string) => ({ eid })) }
             : undefined,
         },
       });

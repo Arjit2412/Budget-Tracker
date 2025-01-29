@@ -13,12 +13,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (pid) {
         const project = await prisma.project.findUnique({
           where: { pid: pid },
-          include: {
-            head: true,
-            state: true,
-            allocation: true,
-            local: true,
-          },
         });
 
         if (!project) {
@@ -30,12 +24,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if(name){
         const project = await prisma.project.findMany({
           where: { name: name },
-          include: {
-            head: true,
-            state: true,
-            allocation: true,
-            local: true,
-          },
         });
 
         if (!project) {
@@ -75,12 +63,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           start: start,
           end: end,
           status,
-          head: { set: head.map((id: string) => ({ pid: id })) },
-          state: { set: state.map((id: string) => ({ sid: id })) },
-          allocation: { set: allocation.map((id: string) => ({ eid: id })) },
           photos,
           central,
-          local: { set: local.map((id: string) => ({ lid: id })) },
         },
       });
 
