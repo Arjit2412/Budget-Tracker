@@ -30,8 +30,8 @@ export default function Home() {
 
       </div>
 
-      <div>
-      <MapComponent/>
+      <div style={{height:500,width: 500}}>
+          <MapComponent/>
       </div>
   </div>
     
