@@ -1,20 +1,22 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
+import { IncomeInput } from "@/app/constants/backend";
 
-export default async function handler(req, res) {
+export default async function handler(req:NextApiRequest, res: NextApiResponse) {
 
   try {
     if (req.method === "GET") {
       // Fetch income by ID
-      const state = req.param['state'];
-      const local = req.param['local'];
-      const ministry = req.param['ministry'];
-      const id = req.param['id'];
+      const state = req.query['state'] as string;
+      const localParam = req.query['local'] as string;
+      const ministry = req.query['ministry'] as string;
+      const id = req.query['id'] as string;
 
+      
       if(id){
         const income = await prisma.income.findUnique({
           where: { iid: id },
           include: {
-            expenditure: true,
             state: true,
             local: true,
           },
@@ -27,9 +29,8 @@ export default async function handler(req, res) {
 
       if(ministry){
         const income = await prisma.income.findMany({
-          where: { ministryMid: ministry },
+          where: { ministryId: ministry },
           include: {
-            expenditure: true,
             state: true,
             local: true,
           },
@@ -40,51 +41,54 @@ export default async function handler(req, res) {
         return res.status(200).json(income);
       }
 
-      if(local){
-        const local = await prisma.local.findMany({
-          where: { local: local },
+      if(localParam){
+        const local = await prisma.income.findMany({
+          where: { localId: localParam },
         });
         if (!local) {
           return res.status(404).json({ error: "Local not found" });
         }
-        return res.status(200).json(local);
+        return res.status(200).json(localParam);
       }
 
       if(state){
-        const state = await prisma.state.findMany({
-          where: { state: state },
+        const stateRes = await prisma.income.findMany({
+          where: { stateId: state },
         });
-        if (!state) {
+        if (!stateRes) {
           return res.status(404).json({ error: "State not found" });
         }
-        return res.status(200).json(state);
+        return res.status(200).json(stateRes);
       }
 
 
     } else if (req.method === "PUT") {
       // Update income by ID
-      const { name, desc, date, t_amount, expenditure, central, state, local } =
-        req.body;
+      const { name, desc, date, central } =
+        req.body as IncomeInput;
+      const id = req.query["id"] as string;
 
+      if (!id) {
+        return res.status(400).json({ error: "Ministry ID is required" });
+      }
       const updatedIncome = await prisma.income.update({
         where: { iid: id },
         data: {
           name,
           desc,
-          date: date ? new Date(date) : undefined,
-          t_amount,
+          date: date,
           central,
-          state: state ? { connect: { sid: state } } : undefined,
-          local: local ? { connect: { lid: local } } : undefined,
-          expenditure: expenditure
-            ? { connect: expenditure.map((eid) => ({ eid })) }
-            : undefined,
         },
       });
 
       return res.status(200).json(updatedIncome);
     } else if (req.method === "DELETE") {
       // Delete income by ID
+      const id = req.query["id"] as string;
+
+      if (!id) {
+        return res.status(400).json({ error: "Ministry ID is required" });
+      }
       await prisma.income.delete({
         where: { iid: id },
       });

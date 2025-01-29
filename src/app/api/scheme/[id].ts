@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
+import { SchemeInput } from "@/app/constants/backend";
+import createImgbbUrl from "../helpers/imgbbFileUpload";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query;
 
   try {
     if (req.method === "GET") {
@@ -12,11 +13,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if(id){
         const scheme = await prisma.scheme.findUnique({
           where: { sid: id },
-          include: {
-            state: true,
-            head: true,
-            expenditure: true,
-          },
         });
         if (!scheme) {
           return res.status(404).json({ error: "Scheme not found" });
@@ -26,11 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if(name){
         const scheme = await prisma.scheme.findMany({
           where: { name: name },
-          include: {
-            state: true,
-            head: true,
-            expenditure: true,
-          },
         });
         if (!scheme) {
           return res.status(404).json({ error: "Scheme not found" });
@@ -44,20 +35,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         name,
         desc,
         central,
-        state,
         start,
         end,
         status,
-        head,
-        photo,
-        expenditure,
-      } = req.body;
+        photos,
+      } = req.body as SchemeInput;
 
       const id = req.query["id"] as string;
 
       if (!id) {
         return res.status(400).json({ error: "Scheme ID is required" });
       }
+      const transformedPhotos = await Promise.all(photos.map(async (image) => {
+              const { desc, photo } = image;
+              const url = (await createImgbbUrl(photo))?.url as string;
+              return { desc: desc, photo: url };
+            }))
       const updatedScheme = await prisma.scheme.update({
         where: { sid: id },
         data: {
@@ -67,12 +60,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           start: start,
           end: end,
           status,
-          head: head ? { connect: head.map((pid: string) => ({ pid })) } : undefined,
-          state: state ? { connect: state.map((sid: string) => ({ sid })) } : undefined,
-          photo,
-          expenditure: expenditure
-            ? { connect: expenditure.map((eid: string) => ({ eid })) }
-            : undefined,
+          photos: transformedPhotos,
         },
       });
 
