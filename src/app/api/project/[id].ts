@@ -41,12 +41,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         start,
         end,
         status,
-        head,
-        state,
-        allocation,
         photos,
         central,
-        local,
       } = req.body;
 
       const id = req.query["id"] as string;

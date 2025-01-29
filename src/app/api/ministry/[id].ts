@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
+import { MinistryInput } from "@/app/constants/backend";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
@@ -44,14 +45,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         central,
         state,
         name,
-        head,
-        income,
-        expenditure,
-        scheme,
-        project,
-      } = req.body;
+      } = req.body as MinistryInput;
 
-      const id = req.query["id"] as string; // ministry ID to be recieved as query parameter
+      const id = req.query["id"] as string; 
 
       if (!id) {
         return res.status(400).json({ error: "Ministry ID is required" });

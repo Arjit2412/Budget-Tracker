@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
+import { IncomeInput } from "@/app/constants/backend";
 
 export default async function handler(req:NextApiRequest, res: NextApiResponse) {
 
@@ -63,8 +64,8 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
 
     } else if (req.method === "PUT") {
       // Update income by ID
-      const { name, desc, date, t_amount, central, state, local } =
-        req.body;
+      const { name, desc, date, central } =
+        req.body as IncomeInput;
         const id = req.query["id"] as string;
 
         if (!id) {
@@ -76,10 +77,7 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
           name,
           desc,
           date: date,
-          t_amount,
           central,
-          state: state ? { connect: { sid: state } } : undefined,
-          local: local ? { connect: { lid: local } } : undefined,
         },
       });
 
