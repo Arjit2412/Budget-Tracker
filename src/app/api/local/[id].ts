@@ -1,11 +1,17 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
 
   try {
     if (req.method === "GET") {
       // Fetch local by ID
+      const id = req.query["id"] as string;
+
+      if (!id) {
+        return res.status(400).json({ error: "Local ID is required" });
+      }
       const local = await prisma.local.findUnique({
         where: { lid: id },
         include: {
@@ -25,23 +31,27 @@ export default async function handler(req, res) {
     } else if (req.method === "PUT") {
       // Update local by ID
       const { name, head, income, scheme, project, expenditure } = req.body;
+      const id = req.query["id"] as string;
 
+      if (!id) {
+        return res.status(400).json({ error: "Local ID is required" });
+      }
       const updatedLocal = await prisma.local.update({
         where: { lid: id },
         data: {
           name,
-          head: head ? { connect: head.map((pid) => ({ pid })) } : undefined,
+          head: head ? { connect: head.map((pid: string) => ({ pid })) } : undefined,
           income: income
-            ? { connect: income.map((iid) => ({ iid })) }
+            ? { connect: income.map((iid: string) => ({ iid })) }
             : undefined,
           scheme: scheme
-            ? { connect: scheme.map((sid) => ({ sid })) }
+            ? { connect: scheme.map((sid: string) => ({ sid })) }
             : undefined,
           project: project
-            ? { connect: project.map((pid) => ({ pid })) }
+            ? { connect: project.map((pid: string) => ({ pid })) }
             : undefined,
           expenditure: expenditure
-            ? { connect: expenditure.map((eid) => ({ eid })) }
+            ? { connect: expenditure.map((eid: string) => ({ eid })) }
             : undefined,
         },
       });
@@ -49,6 +59,11 @@ export default async function handler(req, res) {
       return res.status(200).json(updatedLocal);
     } else if (req.method === "DELETE") {
       // Delete local by ID
+      const id = req.query["id"] as string;
+
+      if (!id) {
+        return res.status(400).json({ error: "Local ID is required" });
+      }
       await prisma.local.delete({
         where: { lid: id },
       });
