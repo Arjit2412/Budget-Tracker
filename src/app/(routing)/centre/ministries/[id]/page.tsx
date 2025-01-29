@@ -4,9 +4,8 @@ import NavigationCard from "@/components/NavigationCard";
 
 export default function MinistryDetailPage() {
 
-  
-    const params=useParams();
-    const {id}=params;
+  const params=useParams();
+  const {id}=params;
 
   return (
     <div>
