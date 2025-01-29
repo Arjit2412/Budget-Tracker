@@ -66,11 +66,11 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
       // Update income by ID
       const { name, desc, date, central } =
         req.body as IncomeInput;
-        const id = req.query["id"] as string;
+      const id = req.query["id"] as string;
 
-        if (!id) {
-          return res.status(400).json({ error: "Ministry ID is required" });
-        }
+      if (!id) {
+        return res.status(400).json({ error: "Ministry ID is required" });
+      }
       const updatedIncome = await prisma.income.update({
         where: { iid: id },
         data: {

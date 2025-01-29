@@ -3,7 +3,6 @@ import prisma from "../../../prisma/client";
 import { MinistryInput } from "@/app/constants/backend";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query;
 
   try {
     if (req.method === "GET") {

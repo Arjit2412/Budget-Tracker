@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json(local);
     } else if (req.method === "PUT") {
       // Update local by ID
-      const { name} = req.body as IncomeInput;
+      const { name } = req.body as IncomeInput;
       const id = req.query["id"] as string;
 
       if (!id) {
