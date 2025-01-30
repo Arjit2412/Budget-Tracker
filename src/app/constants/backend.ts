@@ -42,7 +42,7 @@ export type ProjectInput = {
 
 export type MinistryInput = {
     central: boolean;
-    state: string | null;
+    stateId?: string | null;
     name: string;
     desc: string;
 }
