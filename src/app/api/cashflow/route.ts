@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     const eid = uuidv4();
 
     // Upload image to ImgBB
-    const image = (await createImgbbUrl(photo))?.url as string;
+    const image = photo ? (await createImgbbUrl(photo))?.url as string: undefined;
 
     const newExpenditure = await prisma.cashflow.create({
       data: {

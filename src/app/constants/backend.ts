@@ -27,8 +27,8 @@ export enum Status {
 export type ProjectInput = {
     name: string;
     desc: string;
-    start: number;
-    end?: number;
+    start: string;
+    end?: string;
     status: Status;
     stateIds: string[];
     photos: {
@@ -55,7 +55,7 @@ export type IncomeInput = {
     name: string;
     desc: string;
     central: boolean;
-    date: number;
+    date: string;
     stateId: string; // state id
     localId: string; // local id
     ministryId: string;
@@ -77,8 +77,8 @@ export type SchemeInput = {
     stateIds: string[];
     localIds: string[];
     ministryId: string;
-    start: number;
-    end?: number;
+    start: string;
+    end?: string;
     status: Status;
     photos: {
         desc: string,

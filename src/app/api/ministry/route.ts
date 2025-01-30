@@ -1,43 +1,44 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../prisma/client";
+import { NextResponse } from "next/server";
+import prisma from "@/prisma/client";
 import { v4 as uuidv4 } from "uuid";
 import { MinistryInput } from "@/app/constants/backend";
 
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
   try {
-    if (req.method === "GET") {
-      // Fetch all ministries
-      const ministries = await prisma.ministry.findMany();
-      return res.status(200).json(ministries);
-    } else if (req.method === "POST") {
-      // Create a new ministry
-      const {
+    const ministries = await prisma.ministry.findMany();
+    return NextResponse.json(ministries, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const body: MinistryInput = await req.json();
+    const { central, stateId, name, desc } = body;
+
+    if (central && stateId) {
+      return NextResponse.json({ error: "State value should be null when central is true" }, { status: 400 });
+    }
+    if (!name || !desc) {
+      return NextResponse.json({ error: "Ministry name and description can't be null" }, { status: 400 });
+    }
+
+    const mid = uuidv4();
+    const newMinistry = await prisma.ministry.create({
+      data: {
+        mid,
         central,
         stateId,
         name,
-        desc
-      } = req.body as MinistryInput;
-      if (central && stateId) throw new Error("State value should be null when central is true");
-      if (!name || !desc) throw new Error("Ministry name and description can't be null")
-      const mid = uuidv4();
-      const newMinistry = await prisma.ministry.create({
-        data: {
-          mid,
-          central,
-          stateId,
-          name,
-          desc
-        },
-      });
+        desc,
+      },
+    });
 
-      return res.status(201).json(newMinistry);
-    } else {
-      res.setHeader("Allow", ["GET", "POST"]);
-      return res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
+    return NextResponse.json(newMinistry, { status: 201 });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

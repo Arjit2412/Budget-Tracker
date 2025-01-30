@@ -7,7 +7,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     const { id } = params;
     const { searchParams } = new URL(req.url);
     const name = searchParams.get("name");
-    const state = searchParams.get("state");
+    const stateId = searchParams.get("state");
 
     if (id) {
       const ministry = await prisma.ministry.findUnique({
@@ -33,9 +33,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
       return NextResponse.json(ministries, { status: 200 });
     }
 
-    if (state) {
+    if (stateId) {
       const ministries = await prisma.ministry.findMany({
-        where: { state },
+        where: { stateId },
       });
 
       if (!ministries.length) {
@@ -55,7 +55,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const { id } = params;
-    const { central, state, name } = await req.json() as MinistryInput;
+    const { central, stateId, name } = await req.json() as MinistryInput;
 
     if (!id) {
       return NextResponse.json({ error: "Ministry ID is required" }, { status: 400 });
@@ -63,7 +63,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     const updatedMinistry = await prisma.ministry.update({
       where: { mid: id },
-      data: { central, state, name },
+      data: { central, stateId, name },
     });
 
     return NextResponse.json(updatedMinistry, { status: 200 });
