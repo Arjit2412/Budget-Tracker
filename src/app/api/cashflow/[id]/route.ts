@@ -10,7 +10,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
       return NextResponse.json({ error: "Expenditure ID is required" }, { status: 400 });
     }
 
-    const expenditure = await prisma.expenditure.findUnique({
+    const expenditure = await prisma.cashflow.findUnique({
       where: { eid: id },
       include: { project: true, scheme: true },
     });
@@ -35,7 +35,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       return NextResponse.json({ error: "Expenditure ID is required" }, { status: 400 });
     }
 
-    const updatedExpenditure = await prisma.expenditure.update({
+    const updatedExpenditure = await prisma.cashflow.update({
       where: { eid: id },
       data: { desc, name, amount },
     });
@@ -55,7 +55,7 @@ export async function DELETE(_: NextRequest, { params }: { params: { id: string 
       return NextResponse.json({ error: "Expenditure ID is required" }, { status: 400 });
     }
 
-    await prisma.expenditure.delete({
+    await prisma.cashflow.delete({
       where: { eid: id },
     });
 

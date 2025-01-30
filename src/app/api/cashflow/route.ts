@@ -7,7 +7,7 @@ import createImgbbUrl from "@/app/api/helpers/imgbbFileUpload";
 export async function GET() {
   try {
     // Fetch all expenditures
-    const expenditures = await prisma.expenditure.findMany();
+    const expenditures = await prisma.cashflow.findMany();
     return NextResponse.json(expenditures ?? [], { status: 200 });
   } catch (error) {
     console.error("Error fetching expenditures:", error);
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     // Upload image to ImgBB
     const image = (await createImgbbUrl(photo))?.url as string;
 
-    const newExpenditure = await prisma.expenditure.create({
+    const newExpenditure = await prisma.cashflow.create({
       data: {
         eid,
         photo: image,
