@@ -18,7 +18,7 @@ enum Status {
 model Ministry {
   mid          String        @id @default(uuid())
   central      Boolean
-  state        String? // Nullable for ministries that are central
+  stateId        String? // Nullable for ministries that are central
   name         String
   desc        String
   persons      Person[]      @relation("PersonMinistry")

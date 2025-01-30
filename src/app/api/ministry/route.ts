@@ -14,18 +14,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Create a new ministry
       const {
         central,
-        state,
+        stateId,
         name,
         desc
       } = req.body as MinistryInput;
-      if (central && state) throw new Error("State value should be null when central is true");
+      if (central && stateId) throw new Error("State value should be null when central is true");
       if (!name || !desc) throw new Error("Ministry name and description can't be null")
       const mid = uuidv4();
       const newMinistry = await prisma.ministry.create({
         data: {
           mid,
           central,
-          state,
+          stateId,
           name,
           desc
         },
