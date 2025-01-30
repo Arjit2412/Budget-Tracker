@@ -16,7 +16,6 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const { name } = await req.json(); // Read JSON body
-    console.log("HI", name);
     
     const sid = uuidv4();
     const newState = await prisma.state.create({
