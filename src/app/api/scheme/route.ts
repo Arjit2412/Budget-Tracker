@@ -28,19 +28,19 @@ export async function POST(req: Request) {
       localIds,
     } = await req.json(); // Parse JSON body
 
-    if (central && stateIds.length === 0 && localIds.length === 0 && !ministryId) {
+    if (central && stateIds?.length === 0 && localIds?.length === 0 && !ministryId) {
       return NextResponse.json(
         { error: "Either stateIds, localIds, or ministryId is needed when central is true" },
         { status: 400 }
       );
     }
-    if (!central && stateIds.length === 0 && localIds.length === 0) {
+    if (!central && stateIds?.length === 0 && localIds?.length === 0) {
       return NextResponse.json(
         { error: "Central is false, but no stateId or localId given" },
         { status: 400 }
       );
     }
-    if (stateIds.length > 1 && ministryId) {
+    if (stateIds?.length > 1 && ministryId) {
       return NextResponse.json(
         { error: "To create a Scheme under a state ministry, stateIds array should have only 1 item" },
         { status: 400 }
@@ -50,13 +50,13 @@ export async function POST(req: Request) {
     const sid = uuidv4();
 
     // Upload photos and transform them
-    const transformedPhotos = await Promise.all(
+    const transformedPhotos = photos && photos.length > 0 ? await Promise.all(
       photos.map(async (image: { desc: string; photo: string }) => {
         const { desc, photo } = image;
         const url = (await createImgbbUrl(photo))?.url as string;
         return { desc, photo: url };
       })
-    );
+    ) : undefined ;
 
     // Create new scheme
     const newScheme = await prisma.scheme.create({
@@ -68,8 +68,8 @@ export async function POST(req: Request) {
         start,
         end: end || null,
         status,
-        stateIds: stateIds.length > 0 ? stateIds : undefined,
-        localIds: localIds.length > 0 ? localIds : undefined,
+        stateIds: stateIds?.length > 0 ? stateIds : undefined,
+        localIds: localIds?.length > 0 ? localIds : undefined,
         ministryId: ministryId || undefined,
         photos: transformedPhotos,
       },
