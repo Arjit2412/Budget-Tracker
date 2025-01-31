@@ -31,6 +31,7 @@ export default function ProjectPage() {
     <div>
       <p>Ministry: {ministryObj?.name}</p> {/* Display ministry value */}
       <BaseTable
+        route="/project"
         data={data} // Fetch and pass data based on ministry later
         columns={[
           {

@@ -48,6 +48,7 @@ export default function SchemePage() {
       {ministry && ministry !== "undefined" && <p>Ministry: {ministryObj?.name}</p>}
       {stateId && stateId !== "undefined" && <p>State: {stateObj?.name}</p>}
       <BaseTable
+        route="/scheme"
         data={data}
         columns={[
           {
