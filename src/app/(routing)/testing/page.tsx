@@ -1,13 +1,14 @@
 import React from 'react';
 import DataCard from "@/components/BaseDataCard";
+import PersonCard from "@/components/PersonCard";
 
 export default function TestingPage() {
   return (
-    <div className="max-w-3xl mx-auto flex flex-col justify-center items-centre">
-        <div className='flex flex-col items-center'>
+    <div className="max-w-3xl flex flex-col justify-start">
+        <div className='flex flex-col items-center justify-start'>
             Testing Page
         </div>
-        <DataCard schemas={[{
+        {/* <DataCard schemas={[{
           name: "Smart City Development Phase II",
           desc: "A state initiative for smart city development phase ii.",
           start: "1738271255602",
@@ -18,8 +19,18 @@ export default function TestingPage() {
           central: false,
           localIds: [],
           ministryId: null
+        }]} /> */}
+
+        <div className='flex flex-col justify-start'>
+        <PersonCard persons={[{
+          name: "John Doe",
+          image: "https://via.placeholder.com/150",
+          position: "Software Engineer",
+          description: "Passionate about building scalable web applications."
         }]} />
+        </div>
 
     </div>
   );
 }
+
