@@ -1,7 +1,8 @@
 'use client'
 import {useParams} from "next/navigation";
 import NavigationCard from "@/components/NavigationCard";
-
+import MinistryDashboard from "@/components/MinistryDashboardProject";
+import TopGovernmentSchemes from "@/components/MinistryDashboardSchemes";
 export default function MinistryDetailPage() {
 
   const params=useParams();
@@ -32,6 +33,8 @@ export default function MinistryDetailPage() {
           href={`/project?ministry=${id}`}
           />
         </div>
+        <MinistryDashboard />
+        <TopGovernmentSchemes/>
     </div>
   );
 }

@@ -1,0 +1,216 @@
+{
+  "ministries": [
+    {
+      "mid": "m1",
+      "central": true,
+      "state": null,
+      "name": "Ministry of Finance",
+      "desc": "Manages national fiscal policy and economic affairs"
+    },
+    {
+      "mid": "m2",
+      "central": true,
+      "state": null,
+      "name": "Ministry of Defense",
+      "desc": "Oversees national security and defense operations"
+    },
+    {
+      "mid": "m3",
+      "central": false,
+      "state": "Maharashtra",
+      "name": "Maharashtra Education Department",
+      "desc": "Manages state education policies and institutions"
+    },
+    {
+      "mid": "m4",
+      "central": false,
+      "state": "Gujarat",
+      "name": "Gujarat Infrastructure Development",
+      "desc": "Oversees infrastructure projects in Gujarat"
+    }
+  ],
+  "persons": [
+    {
+      "pid": "p1",
+      "name": "Rajesh Kumar",
+      "phone": "+91-9876543210",
+      "address": "Block A, Central Secretariat, New Delhi",
+      "area": ["Finance", "Economic Policy"],
+      "position": ["Secretary", "Chief Financial Advisor"],
+      "photo": "rajesh_kumar.jpg",
+      "stateIds": [],
+      "projectIds": ["proj1", "proj2"],
+      "schemeIds": ["s1"],
+      "localIds": [],
+      "ministries": ["m1"]
+    },
+    {
+      "pid": "p2",
+      "name": "Priya Patel",
+      "phone": "+91-9876543211",
+      "address": "Gujarat Secretariat, Gandhinagar",
+      "area": ["Infrastructure", "Urban Development"],
+      "position": ["Director"],
+      "photo": "priya_patel.jpg",
+      "stateIds": ["GJ"],
+      "projectIds": ["proj3"],
+      "schemeIds": ["s2"],
+      "localIds": ["l1", "l2"],
+      "ministries": ["m4"]
+    }
+  ],
+  "projects": [
+    {
+      "pid": "proj1",
+      "name": "Digital India Initiative",
+      "desc": "National digital infrastructure development",
+      "start": 1672531200000,
+      "end": 1704067200000,
+      "status": "ONGOING",
+      "stateIds": [],
+      "photos": [
+        {
+          "image": "digital_india_1.jpg",
+          "desc": "Digital literacy program"
+        },
+        {
+          "image": "digital_india_2.jpg",
+          "desc": "E-governance implementation"
+        }
+      ],
+      "central": true,
+      "localIds": [],
+      "ministryId": "m1"
+    },
+    {
+      "pid": "proj2",
+      "name": "Smart City Surat",
+      "desc": "Urban development project in Surat",
+      "start": 1680307200000,
+      "end": null,
+      "status": "ONGOING",
+      "stateIds": ["GJ"],
+      "photos": [
+        {
+          "image": "surat_smart_1.jpg",
+          "desc": "Infrastructure development"
+        }
+      ],
+      "central": false,
+      "localIds": ["l1"],
+      "ministryId": "m4"
+    }
+  ],
+  "states": [
+    {
+      "sid": "MH",
+      "name": "Maharashtra"
+    },
+    {
+      "sid": "GJ",
+      "name": "Gujarat"
+    }
+  ],
+  "incomes": [
+    {
+      "iid": "i1",
+      "name": "GST Collection Q1 2023",
+      "desc": "Quarterly GST revenue collection",
+      "date": 1680307200000,
+      "t_amount": "250000000",
+      "central": true,
+      "stateId": null,
+      "localId": null,
+      "ministryId": "m1"
+    },
+    {
+      "iid": "i2",
+      "name": "Property Tax Collection",
+      "desc": "Annual property tax collection",
+      "date": 1682899200000,
+      "t_amount": "150000000",
+      "central": false,
+      "stateId": "GJ",
+      "localId": "l1",
+      "ministryId": "m4"
+    }
+  ],
+  "cashflows": [
+    {
+      "eid": "e1",
+      "photo": "infrastructure_spend.jpg",
+      "desc": "Infrastructure development expenditure",
+      "name": "Road Development Phase 1",
+      "amount": "100000000",
+      "projectId": "proj2",
+      "schemeId": null,
+      "incomeId": "i2",
+      "ministryId": "m4",
+      "central": false,
+      "stateId": "GJ"
+    },
+    {
+      "eid": "e2",
+      "photo": "digital_india_spend.jpg",
+      "desc": "Digital infrastructure implementation",
+      "name": "Digital India Phase 1",
+      "amount": "200000000",
+      "projectId": "proj1",
+      "schemeId": null,
+      "incomeId": "i1",
+      "ministryId": "m1",
+      "central": true,
+      "stateId": "MH"
+    }
+  ],
+  "schemes": [
+    {
+      "sid": "s1",
+      "name": "PM Digital Literacy",
+      "desc": "National digital literacy enhancement program",
+      "central": true,
+      "stateIds": [],
+      "start": 1672531200000,
+      "end": 1704067200000,
+      "status": "ONGOING",
+      "photos": [
+        {
+          "image": "digital_literacy_1.jpg",
+          "desc": "Training session"
+        }
+      ],
+      "ministryId": "m1",
+      "localIds": []
+    },
+    {
+      "sid": "s2",
+      "name": "Gujarat Infrastructure Modernization",
+      "desc": "State-wide infrastructure upgrade",
+      "central": false,
+      "stateIds": ["GJ"],
+      "start": 1680307200000,
+      "end": null,
+      "status": "ONGOING",
+      "photos": [
+        {
+          "image": "guj_infra_1.jpg",
+          "desc": "Modern infrastructure"
+        }
+      ],
+      "ministryId": "m4",
+      "localIds": ["l1", "l2"]
+    }
+  ],
+  "locals": [
+    {
+      "lid": "l1",
+      "name": "Surat Municipal Corporation"
+    },
+    {
+      "lid": "l2",
+      "name": "Ahmedabad Municipal Corporation"
+    }
+  ]
+}
+
+
