@@ -23,7 +23,7 @@ export default function States() {
           key={index}
           title={state.name}
           image={state.image}
-          href={`/state/${state.name.toLowerCase()}`}
+          href={`/states/${state.name.toLowerCase()}`}
         />
       ))}
     </div>

@@ -3,46 +3,44 @@
 import { Home, DollarSign, BookOpen } from "lucide-react";
 import Link from "next/link";
 
+const listItems=[
+  {
+    href:"/",
+    icome:<Home size={20} />,
+    label:"Home"
+  },
+  {
+    href:"/revenue",
+    icome:<DollarSign size={20} />,
+    label:"Revenue"
+  },
+  {
+    href:"/expenditure",
+    icome:<DollarSign size={20} />,
+    label:"Expenditure"
+  },
+  {
+    href:"/about",
+    icome:<BookOpen size={20} />,
+    label:"About Us"
+  }
+]
+
 const Navbar = () => {
   return (
-    <nav className="max-w-3xl mx-auto mb-8 glass-card rounded-lg">
-      <ul className="flex items-center justify-between p-4">
-        <li>
-          <Link 
-            href="/" 
-            className="flex items-center gap-2 hover:text-primary transition-colors"
-          >
-            <Home size={20} />
-            <span>Home</span>
-          </Link>
-        </li>
-        <li>
-          <Link 
-            href="/revenue" 
-            className="flex items-center gap-2 hover:text-primary transition-colors"
-          >
-            <DollarSign size={20} />
-            <span>Revenue</span>
-          </Link>
-        </li>
-        <li>
-          <Link 
-            href="/expenditure" 
-            className="flex items-center gap-2 hover:text-primary transition-colors"
-          >
-            <DollarSign size={20} />
-            <span>Expenditure</span>
-          </Link>
-        </li>
-        <li>
-          <Link 
-            href="/about" 
-            className="flex items-center gap-2 hover:text-primary transition-colors"
-          >
-            <BookOpen size={20} />
-            <span>About Us</span>
-          </Link>
-        </li>
+    <nav /*className="max-w-3xl mx-auto glass-card rounded-lg"*/>
+      <ul className="flex items-center justify-between p-4 gap-x-8">
+        {listItems.map((item,index)=>(
+          <li key={index}>
+            <Link 
+              href={item.href} 
+              className="flex items-center p-2 hover:bg-primary hover:text-white transition-colors rounded-sm"
+            >
+              {item.icome}
+              <span>{item.label}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
