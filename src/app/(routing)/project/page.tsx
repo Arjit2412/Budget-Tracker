@@ -6,6 +6,7 @@ export default function ProjectPage() {
     <div>
       <h1>Project Page</h1>
       <BaseTable
+        route="/project"
         data={[]}
         columns={[
           {

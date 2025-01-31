@@ -5,6 +5,7 @@ export default function IncomePage() {
     <div>
       <h1>Income Page</h1>
       <BaseTable
+        route="/income"
         data={[]}
         columns={[
           {
