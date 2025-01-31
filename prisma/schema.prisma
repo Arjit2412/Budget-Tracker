@@ -16,15 +16,15 @@ enum Status {
 }
 
 model Ministry {
-  mid          String        @id @default(uuid())
+  mid          String     @id @default(uuid())
   central      Boolean
-  state        String? // Nullable for ministries that are central
+  stateId      String? // Nullable for ministries that are central
   name         String
-  desc        String
-  persons      Person[]      @relation("PersonMinistry")
-  schemes      Scheme[]      @relation("SchemeMinistry")
+  desc         String
+  persons      Person[]   @relation("PersonMinistry")
+  schemes      Scheme[]   @relation("SchemeMinistry")
   projects     Project[]
-  expenditures Expenditure[]
+  expenditures Cashflow[]
   incomes      Income[]
 }
 
@@ -35,7 +35,7 @@ model Person {
   address    String
   area       String[]
   position   String[]
-  photo    String
+  photo      String
   stateIds   String[]
   projectIds String[]
   schemeIds  String[]
@@ -44,29 +44,29 @@ model Person {
 }
 
 model Project {
-  pid          String        @id @default(uuid())
+  pid          String     @id @default(uuid())
   name         String
   desc         String
-  start        BigInt // Stored as milliseconds
-  end          BigInt? // Nullable for ongoing projects
+  start        String // Stored as milliseconds
+  end          String? // Nullable for ongoing projects
   status       Status
   stateIds     String[]
   photos       Json[] // Array of objects: { image: string, desc: string }
   central      Boolean
   localIds     String[]
-  ministry     Ministry?     @relation(fields: [ministryId], references: [mid])
+  ministry     Ministry?  @relation(fields: [ministryId], references: [mid])
   ministryId   String?
-  expenditures Expenditure[]
+  expenditures Cashflow[]
 }
 
 model State {
-  sid         String        @id @default(uuid())
+  sid         String     @id @default(uuid())
   name        String
-  Expenditure Expenditure[]
+  Expenditure Cashflow[]
   Income      Income[]
 }
 
-model Expenditure {
+model Cashflow {
   eid        String    @id @default(uuid())
   photo      String?
   desc       String
@@ -81,44 +81,47 @@ model Expenditure {
   ministry   Ministry? @relation(fields: [ministryId], references: [mid])
   ministryId String?
   central    Boolean
-  state      State?     @relation(fields: [stateId], references: [sid])
+  state      State?    @relation(fields: [stateId], references: [sid])
   stateId    String
+  local      Local?    @relation(fields: [localId], references: [lid])
+  localId    String
 }
 
 model Income {
-  iid         String        @id @default(uuid())
+  iid         String     @id @default(uuid())
   name        String
   desc        String
-  date        BigInt // Stored as milliseconds
+  date        String // Stored as milliseconds
   t_amount    String
   central     Boolean
-  state       State?        @relation(fields: [stateId], references: [sid])
+  state       State?     @relation(fields: [stateId], references: [sid])
   stateId     String?
-  local       Local?        @relation(fields: [localId], references: [lid])
+  local       Local?     @relation(fields: [localId], references: [lid])
   localId     String?
-  ministry    Ministry?     @relation(fields: [ministryId], references: [mid])
+  ministry    Ministry?  @relation(fields: [ministryId], references: [mid])
   ministryId  String?
-  Expenditure Expenditure[]
+  Expenditure Cashflow[]
 }
 
 model Local {
-  lid     String   @id @default(uuid())
-  name    String
-  incomes Income[]
+  lid      String     @id @default(uuid())
+  name     String
+  incomes  Income[]
+  Cashflow Cashflow[]
 }
 
 model Scheme {
-  sid          String        @id @default(uuid())
+  sid          String     @id @default(uuid())
   name         String
   desc         String
   central      Boolean
   stateIds     String[]
-  start        BigInt // Stored as milliseconds
-  end          BigInt?
+  start        String // Stored as milliseconds
+  end          String?
   status       Status
   photos       Json[] // Array of objects: { image: string, desc: string }
-  ministry     Ministry?     @relation("SchemeMinistry", fields: [ministryId], references: [mid])
+  ministry     Ministry?  @relation("SchemeMinistry", fields: [ministryId], references: [mid])
   ministryId   String?
-  localIds    String[]
-  expenditures Expenditure[]
+  localIds     String[]
+  expenditures Cashflow[]
 }

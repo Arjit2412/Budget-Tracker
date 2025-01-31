@@ -2,12 +2,12 @@
 
 The following areas should be completed for the success of this project:
 - [ ] Frontend
-- [ ] APIS
+- [x] APIS
 - [ ] Admin Feature
 - [ ] Map
 - [ ] Data Visualization for comparision
 - [ ] Feedback form and Analysis of forms
-- [ ] Schema Recheck - Zolo will do
+- [x] Schema Recheck - Zolo will do
 
 > The order signifies the importance only, not the order of execution
 
@@ -110,15 +110,15 @@ Combining the above three conditions Our best case scenario is to create `Map` f
 
 ### Day 1 (27)
 
-1. All the Components of frontend mentioned above must be completed. - Arjit
-2. The Schema must be verified and the GET routes properly created and if possible tested. - Ashu(GET) and Zolo(Schema)
-3. Map functionality roadmap and GeoJson data collection, with some implementation - Arihant(major work) and Zolo.
+1. All the Components of frontend mentioned above must be completed. - Arjit [DONE]
+2. The Schema must be verified and the GET routes properly created and if possible tested. - Ashu(GET) and Zolo(Schema) [DONE]
+3. Map functionality roadmap and GeoJson data collection, with some implementation - Arihant(major work) and Zolo. [DONE]
 
 ### Day 2 (28)
 
 1. Frontend part must be completed - Arjit
-2. APIS must be completed (if creation is completed early and zolo had time work on Admin middleware and Auth) - Ashu and Zolo
-3. Finishing up with the map work - Arihant
+2. APIS must be completed (if creation is completed early and zolo had time work on Admin middleware and Auth) - Ashu and Zolo [DONE / no admin auth/middlware]
+3. Finishing up with the map work - Arihant [DONE]
 
 ### Day 3 (29)
 
