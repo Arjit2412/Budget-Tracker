@@ -15,22 +15,22 @@ export default function MinistryDetailPage() {
         <NavigationCard
           title="Income"
           image="/placeholder.svg"
-          href={`/centre/ministries/${id}/income`}
+          href={`/income?ministry=${id}`}
         />
         <NavigationCard
           title="Expenditure"
           image="/placeholder.svg"
-          href={`/centre/ministries/${id}/expenditure`}
+          href={`/expenditure?ministry=${id}`}
         />
         <NavigationCard
           title="Scheme"
           image="/placeholder.svg"
-          href={`/centre/ministries/${id}/scheme`}
+          href={`/scheme?ministry=${id}`}
         />
         <NavigationCard
           title="Project"
           image="/placeholder.svg"
-          href={`/centre/ministries/${id}/project`}
+          href={`/project?ministry=${id}`}
           />
         </div>
         <MinistryDashboard />

@@ -5,7 +5,7 @@ export default function Home() {
 
   
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center gap-y-10">
 
       <div style={{height:500,width: 500}}>
           <MapComponent/>

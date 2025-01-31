@@ -1,5 +1,3 @@
-// /c:/Users/kambo/OneDrive/Desktop/NextProject/civic-cardinal/src/app/centre/ministry/[id].tsx
-
 
 import NavigationCard from '@/components/NavigationCard'; // Adjust the import path as needed
 
@@ -22,7 +20,7 @@ export default function Ministries() {
                         key={option.id}
                         title={option.name}
                         image={option.image}
-                        href={`/centre/ministries/${option.id}`}
+                        href={`/ministries/${option.id}`}
                     />
                 ))}
             </div>

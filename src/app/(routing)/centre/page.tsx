@@ -6,7 +6,7 @@ export default function Centre() {
       <NavigationCard
         title="Ministries"
         image="/placeholder.svg"
-        href="/centre/ministries"
+        href="/ministries"
       />
       <NavigationCard
         title="States"

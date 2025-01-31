@@ -1,7 +1,24 @@
-export default function Expenditure() {
+import BaseTable from "@/components/BaseTable";
+import { Expenditure } from "@/app/constants/frontend";
+
+export default function ExpenditurePage() {
   return (
-    <div className="text-center py-12">
-      <h1 className="text-3xl font-bold">Expenditure Page</h1>
+    <div>
+      <h1>Expenditure Page</h1>
+      <BaseTable
+        data={[]}
+        columns={[
+          {
+            header: "Name",
+            accessor: "name",
+          },
+          {
+            header: "Desc",
+            accessor: "desc",
+          },
+        ]}
+        title="Expenditures"                
+      />
     </div>
   );
-}
+};
