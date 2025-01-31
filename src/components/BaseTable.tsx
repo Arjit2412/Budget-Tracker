@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
-
-
+import Link from 'next/link';
 interface BaseTableProps<T> {
+  route: string;
   data: T[];
   columns: {
     header: string;
@@ -13,7 +12,7 @@ interface BaseTableProps<T> {
   title: string;
 }
 
-export default function BaseTable<T>({ data, columns, title }: BaseTableProps<T>) {
+export default function BaseTable<T>({ route, data, columns, title }: BaseTableProps<T>) {
   return (
     <div className="p-4 bg-white shadow-md rounded-2xl">
       <h2 className="text-xl font-semibold mb-4">{title}</h2>
@@ -32,17 +31,20 @@ export default function BaseTable<T>({ data, columns, title }: BaseTableProps<T>
             </tr>
           </thead>
           <tbody>
-            {data.map((row, rowIndex) => (
-              <tr key={rowIndex} className="hover:bg-gray-100">
+            {data.map((row: any, rowIndex) => (
+              <Link href={`${route}/?id=${row.id}`} key={rowIndex}>
+              <tr key={rowIndex}  className="hover:bg-gray-100" >
                 {columns.map((col, colIndex) => (
                   <td
                     key={colIndex}
                     className="px-4 py-2 border-b border-gray-300 text-gray-600"
                   >
                     {col.render ? col.render(row[col.accessor], row) : (row[col.accessor] as React.ReactNode)}
+                    
                   </td>
                 ))}
               </tr>
+              </Link>
             ))}
           </tbody>
         </table>

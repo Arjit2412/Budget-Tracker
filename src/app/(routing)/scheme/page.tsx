@@ -6,6 +6,7 @@ export default function SchemePage() {
     <div>
       <h1>Scheme Page</h1>
       <BaseTable
+        route="/scheme"
         data={[]}
         columns={[
           {

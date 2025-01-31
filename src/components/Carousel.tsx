@@ -18,7 +18,7 @@ export default function Carousel() {
         loop={true}
         autoplay={{ delay: 1000, disableOnInteraction: false }}
         modules={[Autoplay]}
-        className="w-full h-64"
+        className="w-full"
       >
         {images.map((src, index) => (
           <SwiperSlide key={index} className="flex justify-center items-center">
