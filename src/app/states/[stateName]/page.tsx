@@ -21,8 +21,8 @@ const StatePage = async ({ params }: StatePageProps) => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1 style={{ fontSize: "2rem", color: "#333" }}>{formattedStateName}</h1>
-      <p style={{ fontSize: "1.2rem", color: "#555" }}>
+      <h1 style={{ fontSize: "2rem", }}>{formattedStateName}</h1>
+      <p style={{ fontSize: "1.2rem", }}>
         Welcome to the page for <strong>{formattedStateName}</strong>! Here, you can find information about this state.
       </p>
       <Ministries/>

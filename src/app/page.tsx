@@ -1,3 +1,5 @@
+'use client'
+
 import Carousel from "@/components/Carousel";
 import NavigationCard from "@/components/NavigationCard";
 import MapComponent from "@/components/MapComponent";

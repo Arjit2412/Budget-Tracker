@@ -17,7 +17,7 @@ const NavigationCard = ({ title, subtitle, image, href }: NavigationCardProps) =
             src={image}
             alt={title}
             fill
-            className="object-cover"
+            className="object-centre"
           />
         </div>
         <div className="p-6 ">
