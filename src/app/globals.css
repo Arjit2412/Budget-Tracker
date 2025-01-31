@@ -38,7 +38,7 @@
  
   .dark {
     --background: 0,0,0; /* HSL(222 47% 11% */
-    --foreground: 250, 251, 255; /* HSL(210 40% 98% */
+    --foreground: 255, 255, 255; /* HSL(210 40% 98% */
  
     --card: 16, 27, 52; /* HSL(222 47% 11% */
     --card-foreground: 250, 251, 253; /* HSL(210 40% 98% */
@@ -81,5 +81,5 @@
 }
 
 .glass-card {
-  @apply bg-white/80 dark:bg-black backdrop-blur-sm border border-white/20 dark:border-gray-400;
+  @apply bg-white/80 dark:bg-white/80  dark:text-stone-800 backdrop-blur-sm border border-white/20 dark:border-gray-400;
 }
