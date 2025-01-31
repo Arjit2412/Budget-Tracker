@@ -46,7 +46,8 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
         <button
           onClick={() => setIsDark(!isDark)}
-          className="p-2 rounded-full hover:bg-secondary/50 transition-colors"
+          className="p-2 rounded-full
+          hover:bg-secondary/50 transition-colors"
         >
           {isDark ? <SunIcon /> : <MoonIcon />}
         </button>

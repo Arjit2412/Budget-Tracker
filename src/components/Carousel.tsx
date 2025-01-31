@@ -6,7 +6,7 @@ import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 
 const images = [
-  "/india_rasthrapati.jpg", "/indian_amblem.jpg", "/indian_flag.jpg", "/redfort.jpg", "/tajmahal.jpg",
+  "/india_rasthrapati.jpg", "/NE_Preview1.png", "/Indian_Flag_).jpg", "/redfort.jpg", "/tajmahal.jpg",
 ];
 
 export default function Carousel() {
@@ -22,7 +22,7 @@ export default function Carousel() {
       >
         {images.map((src, index) => (
           <SwiperSlide key={index} className="flex justify-center items-center">
-            <img src={src} alt={`Slide ${index}`} className="w-full h-64 object-cover rounded-lg shadow-md" />
+            <img src={src} alt={`Slide ${index}`} className="w-full h-64 object-centre rounded-lg shadow-md" />
           </SwiperSlide>
         ))}
       </Swiper>
