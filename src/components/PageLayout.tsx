@@ -3,14 +3,13 @@
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Image from "next/image";
 import Navbar from "./Navbar";
 // import MapComponent from "./MapComponent";
 
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
   if (typeof window !== 'undefined') {
@@ -35,8 +34,16 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen p-6 animate-fadeIn">
       <header className="max-w-7xl mx-auto flex justify-between items-center mb-8">
         <Link href="/" className="text-2xl font-bold text-primary">
-          Government Portal
+          <Image
+            src="/images/whitelogo.svg"
+            alt="Logo"
+            width={80}
+            height={80}
+          />
         </Link>
+        <div className="max-w-6xl mx-auto glass-card rounded-lg ">
+          <Navbar />
+        </div>
         <button
           onClick={() => setIsDark(!isDark)}
           className="p-2 rounded-full hover:bg-secondary/50 transition-colors"
@@ -45,17 +52,6 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
         </button>
       </header>
       
-      <Navbar />
-    
-      
-      {/* {pathname !== "/" && (
-        <div className="max-w-7xl mx-auto mb-8">
-          <Link href="/" className="text-primary hover:underline">
-            ← Back to Home
-          </Link>
-        </div>
-      )} */}
-
       <main className="max-w-7xl mx-auto">
         {children}
       </main>

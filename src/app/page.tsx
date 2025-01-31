@@ -8,6 +8,7 @@ export default function Home() {
       {/* Carousel */}
       <Carousel />
 
+
       {/* Map */}
       <div style={{ height: 500, width: 500 }} className="mt-8">
         <MapComponent />

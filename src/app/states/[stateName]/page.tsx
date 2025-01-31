@@ -1,4 +1,6 @@
+import NavigationCard from "@/components/NavigationCard";
 import React from "react";
+import Ministries from "@/app/(routing)/ministries/page";
 
 interface StatePageProps {
   params: { stateName: string };
@@ -23,6 +25,7 @@ const StatePage = async ({ params }: StatePageProps) => {
       <p style={{ fontSize: "1.2rem", color: "#555" }}>
         Welcome to the page for <strong>{formattedStateName}</strong>! Here, you can find information about this state.
       </p>
+      <Ministries/>
     </div>
   );
 };

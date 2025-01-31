@@ -1,13 +1,12 @@
-// /c:/Users/kambo/OneDrive/Desktop/NextProject/civic-cardinal/src/app/centre/ministry/[id].tsx
-
 
 import NavigationCard from '@/components/NavigationCard'; // Adjust the import path as needed
 
 const ministryOptions = [
-    { id: 1, name: 'Ministry 1' },
-    { id: 3, name: 'Ministry 3' },
-    { id: 2, name: 'Ministry 2' },
-    { id: 4, name: 'Ministry 4' },
+    { id: 1, name: 'Ministry of Home', image: '/images/Home.svg' },
+    { id: 2, name: 'Ministry of Finance', image: '/images/FInance.svg' },
+    { id: 3, name: 'Ministry of Defense', image: '/images/Defense.svg' },
+    { id: 4, name: 'Minister of Education', image: '/images/education.svg' },
+    { id: 5, name: 'Ministry of Health and Family', image: '/images/Health_India.svg' },
 ];
 
 export default function Ministries() {
@@ -20,8 +19,8 @@ export default function Ministries() {
                     <NavigationCard
                         key={option.id}
                         title={option.name}
-                        image="/placeholder.svg"
-                        href={`/centre/ministries/${option.id}`}
+                        image={option.image}
+                        href={`/ministries/${option.id}`}
                     />
                 ))}
             </div>
