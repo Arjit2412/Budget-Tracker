@@ -32,19 +32,19 @@ export default function BaseTable<T>({ route, data, columns, title }: BaseTableP
           </thead>
           <tbody>
             {data.map((row: any, rowIndex) => (
-              <Link href={`${route}/?id=${row.id}`} key={rowIndex}>
               <tr key={rowIndex}  className="hover:bg-gray-100" >
                 {columns.map((col, colIndex) => (
                   <td
                     key={colIndex}
                     className="px-4 py-2 border-b border-gray-300 text-gray-600"
                   >
+                <Link href={`${route}?id=${row.id}`} key={rowIndex}>
                     {col.render ? col.render(row[col.accessor], row) : (row[col.accessor] as React.ReactNode)}
+                </Link>
                     
                   </td>
                 ))}
               </tr>
-              </Link>
             ))}
           </tbody>
         </table>
