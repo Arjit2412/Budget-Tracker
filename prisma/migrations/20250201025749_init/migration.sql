@@ -8,6 +8,7 @@ CREATE TABLE "Ministry" (
     "stateId" TEXT,
     "name" TEXT NOT NULL,
     "desc" TEXT NOT NULL,
+    "photo" TEXT,
 
     CONSTRAINT "Ministry_pkey" PRIMARY KEY ("mid")
 );
@@ -34,8 +35,8 @@ CREATE TABLE "Project" (
     "pid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "desc" TEXT NOT NULL,
-    "start" BIGINT NOT NULL,
-    "end" BIGINT,
+    "start" TEXT NOT NULL,
+    "end" TEXT,
     "status" "Status" NOT NULL,
     "stateIds" TEXT[],
     "photos" JSONB[],
@@ -50,6 +51,7 @@ CREATE TABLE "Project" (
 CREATE TABLE "State" (
     "sid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "photo" TEXT,
 
     CONSTRAINT "State_pkey" PRIMARY KEY ("sid")
 );
@@ -67,6 +69,7 @@ CREATE TABLE "Cashflow" (
     "ministryId" TEXT,
     "central" BOOLEAN NOT NULL,
     "stateId" TEXT NOT NULL,
+    "localId" TEXT NOT NULL,
 
     CONSTRAINT "Cashflow_pkey" PRIMARY KEY ("eid")
 );
@@ -76,7 +79,7 @@ CREATE TABLE "Income" (
     "iid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "desc" TEXT NOT NULL,
-    "date" BIGINT NOT NULL,
+    "date" TEXT NOT NULL,
     "t_amount" TEXT NOT NULL,
     "central" BOOLEAN NOT NULL,
     "stateId" TEXT,
@@ -101,8 +104,8 @@ CREATE TABLE "Scheme" (
     "desc" TEXT NOT NULL,
     "central" BOOLEAN NOT NULL,
     "stateIds" TEXT[],
-    "start" BIGINT NOT NULL,
-    "end" BIGINT,
+    "start" TEXT NOT NULL,
+    "end" TEXT,
     "status" "Status" NOT NULL,
     "photos" JSONB[],
     "ministryId" TEXT,
@@ -139,6 +142,9 @@ ALTER TABLE "Cashflow" ADD CONSTRAINT "Cashflow_ministryId_fkey" FOREIGN KEY ("m
 
 -- AddForeignKey
 ALTER TABLE "Cashflow" ADD CONSTRAINT "Cashflow_stateId_fkey" FOREIGN KEY ("stateId") REFERENCES "State"("sid") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Cashflow" ADD CONSTRAINT "Cashflow_localId_fkey" FOREIGN KEY ("localId") REFERENCES "Local"("lid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Income" ADD CONSTRAINT "Income_stateId_fkey" FOREIGN KEY ("stateId") REFERENCES "State"("sid") ON DELETE SET NULL ON UPDATE CASCADE;

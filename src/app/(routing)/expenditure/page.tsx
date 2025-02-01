@@ -6,6 +6,7 @@ export default function ExpenditurePage() {
     <div>
       <h1>Expenditure Page</h1>
       <BaseTable
+        route="/cashflow"
         data={[]}
         columns={[
           {

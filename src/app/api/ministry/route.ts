@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 
       return NextResponse.json(ministry, { status: 200 });
     }
-    if(stateId && stateId !== "undefined"){
+    if(stateId && stateId !== "null" && stateId !== "undefined"){
       const ministry = await prisma.ministry.findMany({
         where: {stateId}
       });
