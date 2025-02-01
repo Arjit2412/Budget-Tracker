@@ -21,6 +21,7 @@ model Ministry {
   stateId      String? // Nullable for ministries that are central
   name         String
   desc         String
+  photo        String?
   persons      Person[]   @relation("PersonMinistry")
   schemes      Scheme[]   @relation("SchemeMinistry")
   projects     Project[]
@@ -62,6 +63,7 @@ model Project {
 model State {
   sid         String     @id @default(uuid())
   name        String
+  photo       String?
   Expenditure Cashflow[]
   Income      Income[]
 }
