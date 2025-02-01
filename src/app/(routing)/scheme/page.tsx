@@ -42,7 +42,7 @@ export default function SchemePage() {
       }
     }
     fetchProject();
-  },[stateId]);
+  },[ministry,stateId]);
   return (
     <div>
       {ministry && ministry !== "undefined" && <p>Ministry: {ministryObj?.name}</p>}

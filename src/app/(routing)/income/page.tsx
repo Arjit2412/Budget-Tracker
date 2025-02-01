@@ -38,7 +38,7 @@ export default function IncomePage() {
       }
     }
     fetchProject();
-  },[]);
+  },[ministry,stateId]);
   return (
     <div>
       {ministry && ministry !== "undefined" && <p>Ministry: {ministryObj?.name}</p>}

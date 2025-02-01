@@ -22,7 +22,7 @@ export default function Ministries({stateId}: {stateId: string}) {
         } catch (error) {
             setError("Some error occured");
         }    
-    }, []);
+    }, [stateID]);
 
   if (error) return <p>Error: {error}</p>;
     return (

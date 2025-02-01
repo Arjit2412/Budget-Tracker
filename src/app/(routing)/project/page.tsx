@@ -41,7 +41,7 @@ export default function ProjectPage() {
       }
     }
     fetchProject();
-  },[]);
+  },[ministry,stateId]);
   return (
     <div>
       {ministry && ministry !== "undefined" && <p>Ministry: {ministryObj?.name}</p>}

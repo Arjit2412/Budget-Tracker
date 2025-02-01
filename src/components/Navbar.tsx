@@ -10,14 +10,14 @@ const listItems=[
     label:"Home"
   },
   {
-    href:"/revenue",
-    icome:<DollarSign size={20} />,
-    label:"Revenue"
+    href:"/centre",
+    icome:<Home size={20} />,
+    label:"Centre"
   },
   {
-    href:"/expenditure",
-    icome:<DollarSign size={20} />,
-    label:"Expenditure"
+    href:"/state",
+    icome:<Home size={20} />,
+    label:"State"
   },
   {
     href:"/about",
