@@ -5,8 +5,16 @@ import { IncomeInput } from "@/app/constants/backend";
 
 // Expenditure object is used to +ve the money as opposed to -ve the money in other objects
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const stateId = url.searchParams.get("stateId");
+    if(stateId && stateId !== "undefined"){
+      const state = await prisma.income.findMany({
+        where: {stateId}
+      });
+      return NextResponse.json(state,{status: 200});
+    }
     // Fetch all incomes
     const incomes = await prisma.income.findMany();
     return NextResponse.json(incomes ?? [], { status: 200 });

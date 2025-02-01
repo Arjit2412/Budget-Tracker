@@ -2,8 +2,16 @@ import { NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const stateId = url.searchParams.get("stateId");
+    if(stateId && stateId !== "undefined"){
+      const state = await prisma.state.findUnique({
+        where: {sid: stateId}
+      });
+      return NextResponse.json(state,{status: 200});
+    }
     // Fetch all states
     const states = await prisma.state.findMany();
     return NextResponse.json(states, { status: 200 });
