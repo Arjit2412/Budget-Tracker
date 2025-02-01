@@ -18,9 +18,9 @@ export default function IncomePage() {
       if(ministry && ministry !== "undefined"){
         const data = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/income?ministryId=${ministry}`);
       const income = data?.data.map((project: Income) => {
-        const {date,...others} = project;
+        const {iid,date,...others} = project;
         const dateNew = convertToIST(Number(date));
-        return {date: dateNew, ...others};
+        return {date: dateNew, id: iid, ...others};
       })
       setData(income);
       const ministryData = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/ministry?id=${ministry}`);
@@ -28,9 +28,9 @@ export default function IncomePage() {
       }else if(stateId && stateId !== "undefined"){
         const data = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/income?stateId=${stateId}`);
       const income = data?.data.map((income: Income) => {
-        const {date,...others} = income;
+        const {iid,date,...others} = income;
         const dateNew = convertToIST(Number(date));
-        return {date:dateNew, ...others};
+        return {date:dateNew,id: iid, ...others};
       })
       setData(income);
       const stateData = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/state?stateId=${stateId}`);
@@ -39,12 +39,12 @@ export default function IncomePage() {
     }
     fetchProject();
   },[]);
-  console.log("HI",stateObj,data);
   return (
     <div>
       {ministry && ministry !== "undefined" && <p>Ministry: {ministryObj?.name}</p>}
       {stateId && stateId !== "undefined" && <p>State: {stateObj?.name}</p>}
         <BaseTable
+          route="/income"
           data={data} // Fetch and pass data based on ministry later
           columns={[
             {

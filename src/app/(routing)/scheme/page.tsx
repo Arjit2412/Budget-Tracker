@@ -17,24 +17,24 @@ export default function SchemePage() {
   useEffect(() => {
     async function fetchProject(){
       if(ministry && ministry !== "undefined"){
-        const data = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/project?ministryId=${ministry}`);
+        const data = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/scheme?ministryId=${ministry}`);
       const scheme = data?.data.map((scheme: Scheme) => {
-        const {start,end,...others} = scheme;
+        const {sid,start,end,...others} = scheme;
         const startNew = convertToIST(Number(start));
         const endNew = convertToIST(Number(end));
-        return {start:startNew,end: endNew, ...others};
+        return {id: sid,start:startNew,end: endNew, ...others};
       })
       setData(scheme);
       const ministryData = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/ministry?id=${ministry}`);
       setMinistryObj(ministryData.data);
       }
       else if(stateId && stateId !== "undefined"){
-        const data = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/project?stateId=${stateId}`);
+        const data = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/scheme?stateId=${stateId}`);
       const scheme = data?.data.map((scheme: Scheme) => {
-        const {start,end,...others} = scheme;
+        const {sid,start,end,...others} = scheme;
         const startNew = convertToIST(Number(start));
         const endNew = convertToIST(Number(end));
-        return {start:startNew,end: endNew, ...others};
+        return {id: sid,start:startNew,end: endNew, ...others};
       })
       setData(scheme);
       const stateData = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/state?stateId=${stateId}`);

@@ -48,6 +48,11 @@ function StatePage() {
           image="/placeholder.svg"
           href={`/scheme?stateId=${state?.sid}`}
         />
+        <NavigationCard
+          title="Projects"
+          image="/placeholder.svg"
+          href={`/project?stateId=${state?.sid}`}
+        />
       </div>
     </div>
   );
